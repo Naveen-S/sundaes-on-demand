@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SummaryForm from '../SummaryForm';
 
@@ -31,7 +31,7 @@ test('Confirm button enables on first click of checkbox and disables on next', (
   expect(confirmButton).toBeDisabled();
 });
 
-test('Check if popover opens if on hover', () => {
+test('Check if popover opens if on hover', async () =>  {
   render(<SummaryForm />);
   // Except popover is not open
   const popover = screen.queryByText(
@@ -50,8 +50,7 @@ test('Check if popover opens if on hover', () => {
 
   // Disappear on unhover.
   userEvent.unhover(tAndC);
-  const popoverOnHoverOut = screen.queryByText(
+  await waitForElementToBeRemoved(() =>  screen.queryByText(
     /No ice cream will actually be delivered/i
-  );
-  expect(popoverOnHoverOut).not.toBeInTheDocument();
+  ));
 });
