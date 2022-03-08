@@ -25,3 +25,4 @@ test('displays images for each topping option', async () => {
   const altText = toppingsImages.map((element) => element.alt);
   expect(altText).toEqual([ 'M&Ms topping', 'Badam topping', 'Hot Chocolate Fudge topping']);
 })
+
